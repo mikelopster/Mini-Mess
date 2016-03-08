@@ -138,13 +138,13 @@ public class UserController_test : MonoBehaviour
 		{
 			//zero out our velocity.y
 			velocity.y = 0;
-			Debug.Log ("Grounded");
+//			Debug.Log ("Grounded");
 		} 
 		else 
 		{
 			//decrease velocity.y
 			velocity.y -= physSetting.downAccel;
-			Debug.Log ("Jumping");
+//			Debug.Log ("Jumping");
 		}
 	}
 
@@ -168,7 +168,7 @@ public class UserController_test : MonoBehaviour
 		Debug.DrawRay(transform.position + mid, fwd * moveSetting.distToFace, Color.green);
 		if (Physics.Raycast (transform.position + mid, fwd, out hit , moveSetting.distToFace)) 
 		{
-			Debug.Log ("Face : " + hit.transform.name);
+//			Debug.Log ("Face : " + hit.transform.name);
 			if (clickInput) Action (hit);
 		}
 	}
@@ -177,8 +177,12 @@ public class UserController_test : MonoBehaviour
 	{
 		string tag = hit.transform.tag;
 		string name = hit.transform.name;
-		if (tag == "NPC")
-			Debug.Log ("Talk with " + name + ".");
+
+		if (tag == "NPC") {
+			NPCEvent evt = hit.transform.gameObject.GetComponent<NPCEvent> ();
+			Debug.Log ("Talk with " + name + "." + evt.npcIndex.ToString());
+			QuestManager.instance.CheckQuest (evt.npcIndex,evt.npcMain);
+		}
 		else if (tag == "Enemy") 
 			Debug.Log ("Shoot " + name + "!!!");
 	}

@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Collections;
 
 public class NPCResource : MonoBehaviour {
-	public static List<NPC> npcData = new List<NPC>();
+
+	public static NPCResource instance;
+
+	public List<NPC> npcData = new List<NPC>();
 
 	// Use this for initialization
 	void Awake () {
-	
+
+		instance = this;
+
 		NPC newNPC = new NPC ("Earth");
 		string talkD = "Hello, My name is Earth!";
 		Dictionary<int, Dictionary<int,string>> newTalk = new Dictionary<int, Dictionary<int,string>> ();
 		newTalk [0] = new Dictionary<int, string> ();
-		newTalk[0][0] = "Start Quest";
-		newTalk[0][999] = "End Quest";
+		newTalk[0][2] = "Talk back to Pay!";
 		newNPC.SetTalk (talkD, newTalk);
 		npcData.Add (newNPC);
 
@@ -21,13 +25,15 @@ public class NPCResource : MonoBehaviour {
 		talkD = "What do you want to eat?";
 		newTalk = new Dictionary<int, Dictionary<int,string>> ();
 		newTalk [0] = new Dictionary<int, string> ();
-		newTalk[0][1] = "Talk back to Earth!";
+		newTalk[0][0] = "Do you want to get Quest ?";
+		newTalk[0][1] = "Let's talk to Earth Major!";
+		newTalk[0][3] = "End Quest";
 		newNPC.SetTalk (talkD, newTalk);
 		npcData.Add (newNPC);
-
+//
 	}
 
-	public static NPC LoadNPC(int index) {
+	public NPC LoadNPC(int index) {
 		return npcData [index];
 	}
 	

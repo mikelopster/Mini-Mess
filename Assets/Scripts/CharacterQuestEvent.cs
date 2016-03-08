@@ -8,12 +8,12 @@ public class CharacterQuestEvent : MonoBehaviour {
 		
 	// Use this for initialization
 	void Start () {
-		
+		// Update is called once per frame
 	}
 	
-	// Update is called once per frame
+		
 	void Update () {
-//		Debug.Log (questList.Count);
+		//	Debug.Log (questList.Count);
 	}
 
 	public void AddQuest(Quest quest) {
