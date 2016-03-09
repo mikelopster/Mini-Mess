@@ -40,6 +40,7 @@ public class UserController_test : MonoBehaviour
 		public string MOUSE_X = "Mouse X";
 		public int LEFT_CLICK = 0;
 	}
+		
 
 	public MoveSettings moveSetting = new MoveSettings();
 	public PhysSettings physSetting = new PhysSettings();
@@ -54,6 +55,7 @@ public class UserController_test : MonoBehaviour
 	RaycastHit hit;
 	Vector3 fwd, dwn;
 	Vector3 mid = new Vector3 (0, 0.5f, 0);
+	bool openTurn;
 
 	bool Grounded()
 	{
@@ -64,6 +66,13 @@ public class UserController_test : MonoBehaviour
 
 	void Start()
 	{
+		// Set Turn as default
+		openTurn = true;
+		// Set mouse in center
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = true;
+
+
 		if (GetComponent<Rigidbody> ()) 
 		{
 			rBody = GetComponent<Rigidbody> ();
@@ -87,8 +96,11 @@ public class UserController_test : MonoBehaviour
 
 	void Update()
 	{
+
 		GetInput ();
-		Turn ();
+		if(openTurn){
+		  Turn ();
+		}
 		Face ();
 	}
 
@@ -182,6 +194,8 @@ public class UserController_test : MonoBehaviour
 			NPCEvent evt = hit.transform.gameObject.GetComponent<NPCEvent> ();
 			Debug.Log ("Talk with " + name + "." + evt.npcIndex.ToString ());
 			QuestManager.instance.CheckQuest (evt.npcIndex, evt.npcMain);
+			Cursor.lockState = CursorLockMode.None;
+			openTurn = false;
 		} else if (tag == "Enemy") {
 			Debug.Log ("Shoot " + name + "!!!");
 
@@ -191,5 +205,10 @@ public class UserController_test : MonoBehaviour
 			QuestManager.instance.CheckEnemyQuest (evt.enemyIndex, evt.enemyMain);
 
 		}
+	}
+
+	public void OpenMouseTurn() {
+		openTurn = true;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 }
