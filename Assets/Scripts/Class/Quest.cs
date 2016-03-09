@@ -5,14 +5,10 @@ using System.Collections;
 
 public class Quest {
 
-	// Condition
-	public int index;
-	public int process = 0;
-
 	// Talk with person 
-	List<NPC> npcList = new List<NPC>();
-	NPC startNPC;
-	NPC destinationNPC;
+	List<int> npcIndexList = new List<int>();
+	List<int> unlockQuestList = new List<int>();
+	List<string> npcTypeList = new List<string> ();
 
 	// Get Item
 
@@ -23,49 +19,34 @@ public class Quest {
 	float bounty;
 	float gold;
 
-	public Quest(int index,float bounty, float gold, List<NPC> npcList) {
-		this.index = index;
+	public Quest(float bounty, float gold, List<int> npcList, List<int> unlockQ, List<string> npcTList) {
 		this.bounty = bounty;
 		this.gold = gold;
-		this.npcList = npcList;
-		this.process = 1;
+		this.npcIndexList = npcList;
+		this.unlockQuestList = unlockQ;
+		this.npcTypeList = npcTList;
 	}
 
-	public void SetMainNPC(NPC start, NPC end) {
-		this.startNPC = start;
-		this.destinationNPC = end;
-	}
-
-	public int[] TalkNPC(NPC npc) {
-		int quest_index = npcList.IndexOf (npc);
-
-		if (quest_index == process - 1) {
-			// Right NPC
-			int[] return_data = { index,process++ } ;
-			return return_data;
-		} 
-		else {
-			// NPC Undefined
-			if(process > npcList.Count) {
-				// Check Destination NPC
-				bool finish = FinishNPC(npc);
-				if(finish) {
-					// Finish Quest
-					npc.FinishQuest();
-					int[] return_data =  { index,999 };
-					return return_data;
-				}
-			}
-
-			int[] fail_data = {-1};
-			return fail_data;
+	public int GetNPCInQuest(int qIndex) {
+		if (qIndex >= npcIndexList.Count) {
+			return 999;
+		} else {
+			return npcIndexList [qIndex];
 		}
 	}
 
-	bool FinishNPC(NPC npc) {
-		return npc == this.destinationNPC;
+	public string GetCurrentQuestType(int qIndex) {
+		if (qIndex >= npcTypeList.Count) {
+			// Default is talk
+			return "Talk";
+		} else {
+			return npcTypeList [qIndex];
+		}
 	}
-		
+
+	public List<int> GetUnlockList() {
+		return unlockQuestList;
+	}
 
 
 }

@@ -40,6 +40,7 @@ public class UserController_test : MonoBehaviour
 		public string MOUSE_X = "Mouse X";
 		public int LEFT_CLICK = 0;
 	}
+		
 
 	public MoveSettings moveSetting = new MoveSettings();
 	public PhysSettings physSetting = new PhysSettings();
@@ -54,6 +55,7 @@ public class UserController_test : MonoBehaviour
 	RaycastHit hit;
 	Vector3 fwd, dwn;
 	Vector3 mid = new Vector3 (0, 0.5f, 0);
+	bool openTurn;
 
 	bool Grounded()
 	{
@@ -64,6 +66,13 @@ public class UserController_test : MonoBehaviour
 
 	void Start()
 	{
+		// Set Turn as default
+		openTurn = true;
+		// Set mouse in center
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = true;
+
+
 		if (GetComponent<Rigidbody> ()) 
 		{
 			rBody = GetComponent<Rigidbody> ();
@@ -87,8 +96,11 @@ public class UserController_test : MonoBehaviour
 
 	void Update()
 	{
+
 		GetInput ();
-		Turn ();
+		if(openTurn){
+		  Turn ();
+		}
 		Face ();
 	}
 
@@ -137,13 +149,13 @@ public class UserController_test : MonoBehaviour
 		{
 			//zero out our velocity.y
 			velocity.y = 0;
-			Debug.Log ("Grounded");
+//			Debug.Log ("Grounded");
 		} 
 		else 
 		{
 			//decrease velocity.y
 			velocity.y -= physSetting.downAccel;
-			Debug.Log ("Jumping");
+//			Debug.Log ("Jumping");
 		}
 	}
 
@@ -167,7 +179,6 @@ public class UserController_test : MonoBehaviour
 		Debug.DrawRay(transform.position + mid, fwd * moveSetting.distToFace, Color.green);
 		if (Physics.Raycast (transform.position + mid, fwd, out hit , moveSetting.distToFace)) 
 		{
-			//Debug.Log ("Face : " + hit.transform.name);
 			if (clickInput) Action (hit);
 		}
 	}
@@ -176,9 +187,26 @@ public class UserController_test : MonoBehaviour
 	{
 		string tag = hit.transform.tag;
 		string name = hit.transform.name;
-		if (tag == "NPC")
-			Debug.Log ("Talk with " + name + ".");
-		else if (tag == "Enemy") 
+
+		if (tag == "NPC") {
+			NPCEvent evt = hit.transform.gameObject.GetComponent<NPCEvent> ();
+			Debug.Log ("Talk with " + name + "." + evt.npcIndex.ToString ());
+			QuestManager.instance.CheckQuest (evt.npcIndex, evt.npcMain);
+			Cursor.lockState = CursorLockMode.None;
+			openTurn = false;
+		} else if (tag == "Enemy") {
 			Debug.Log ("Shoot " + name + "!!!");
+
+			// Assume Enemy Die
+			Destroy (hit.transform.gameObject);
+			EnemyEvent evt = hit.transform.gameObject.GetComponent<EnemyEvent> ();
+			QuestManager.instance.CheckEnemyQuest (evt.enemyIndex, evt.enemyMain);
+
+		}
+	}
+
+	public void OpenMouseTurn() {
+		openTurn = true;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 }
