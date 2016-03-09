@@ -8,6 +8,8 @@ public class QuestManager : MonoBehaviour {
 	public static QuestManager instance;
 
 	NPC currentNPC;
+	Enemy currentEnemy;
+	Quest currentQuest;
 	int[] questPoint;
 
 
@@ -24,22 +26,53 @@ public class QuestManager : MonoBehaviour {
 		Debug.Log(questPoint[0] + ", " + questPoint[1]);
 
 		if (questPoint[1] == -1) {
+			
 			// cannot get quest
-			UIController.instance.TalkUIDefault (npcMain.GetName (), npcMain.GetTalkDefault ());
+			UIController.instance.TalkUIDefault (currentNPC.GetName (), currentNPC.GetTalkDefault ());
 			Debug.Log (currentNPC.GetName () + ": " + currentNPC.GetTalkDefault ());
 		} 
 		else {
+			currentQuest = QuestResource.instance.LoadQuest(questPoint[0]);
+
 			if(questPoint[1] == 0) {
 				// Ask Quest for start
 				UIController.instance.TalkUIQuest(npcMain.GetName (), npcMain.GetTalkQuest(questPoint[0],questPoint[1]));
-				Debug.Log(currentNPC.GetName() + ": " + currentNPC.GetTalkQuest(questPoint[0],questPoint[1]));
 			}else {
-				// Get to next npc
-				UIController.instance.TalkUIDefault (npcMain.GetName (), currentNPC.GetTalkQuest(questPoint[0],questPoint[1]));
-				UpdateQuest ();
+				// Check Type Quest
+				string qType = currentQuest.GetCurrentQuestType (questPoint [1]);
+
+				if(qType == "Talk"){
+					// Get to Next npc
+					UIController.instance.TalkUIDefault (npcMain.GetName (), currentNPC.GetTalkQuest(questPoint[0],questPoint[1]));
+					UpdateQuest ();
+				}
 			}
 			
 		}
+	}
+
+	public void CheckEnemyQuest(int enemyIndex,Enemy enemyMain) {
+		// Check Status
+		questPoint = QuestResource.instance.GetQuestIndex(enemyIndex);
+		currentEnemy = enemyMain;
+
+		// QuestIndex, QuestStatus
+
+		if (questPoint[1] != -1) {
+			currentQuest = QuestResource.instance.LoadQuest(questPoint[0]);
+			// Check Type Quest
+			string qType = currentQuest.GetCurrentQuestType (questPoint [1]-1);
+
+			Debug.Log("Enemy Kill: " + questPoint[0] + ", " + questPoint[1] + "," + qType);
+
+			if(qType == "Enemy"){
+				Debug.Log ("Clear!");
+				UIController.instance.TalkUIDefault ("System", "You kill enemy in quest!");
+				UpdateQuest ();
+			}
+
+		}
+
 	}
 
 
@@ -53,11 +86,14 @@ public class QuestManager : MonoBehaviour {
 
 	public void UpdateQuest() {
 		// Update NPC
-		Quest currentQuest = QuestResource.instance.LoadQuest(questPoint[0]);
+
+
 		int nextNPC = currentQuest.GetNPCInQuest (questPoint [1]);
-		if (nextNPC != 999) // Check last quest
+		string qStatus = currentQuest.GetCurrentQuestType (questPoint [1]);
+
+		if (nextNPC != 999) {// Check last quest
 			questPoint [1]++; // Update to next
-		else {
+		}else {
 			// End Quest
 			questPoint [1] = 999;
 
@@ -70,8 +106,7 @@ public class QuestManager : MonoBehaviour {
 		Debug.Log ("Next: " + questPoint [0] + "," + questPoint [1] + "," + nextNPC);
 
 		// Update Status
-		QuestResource.instance.SetQuestStatus(questPoint[0],questPoint[1],nextNPC);
-
+		QuestResource.instance.SetQuestStatus(questPoint[0],questPoint[1],qStatus,nextNPC);
 	}
 
 

@@ -32,9 +32,10 @@ public class NPCResource : MonoBehaviour {
 		newTalk[0][1] = "Let's talk to Earth Major!";
 		newTalk[0][3] = "End Quest";
 		newTalk [1] = new Dictionary<int,string> ();
-		newTalk[1][2] = "Thank you mike! (End Quest)";
+		newTalk[1][3] = "Thank you mike! (End Quest)";
 		newNPC.SetTalk (talkD, newTalk);
 		npcData.Add (newNPC);
+	
 //
 	}
 

@@ -180,10 +180,16 @@ public class UserController_test : MonoBehaviour
 
 		if (tag == "NPC") {
 			NPCEvent evt = hit.transform.gameObject.GetComponent<NPCEvent> ();
-			Debug.Log ("Talk with " + name + "." + evt.npcIndex.ToString());
-			QuestManager.instance.CheckQuest (evt.npcIndex,evt.npcMain);
-		}
-		else if (tag == "Enemy") 
+			Debug.Log ("Talk with " + name + "." + evt.npcIndex.ToString ());
+			QuestManager.instance.CheckQuest (evt.npcIndex, evt.npcMain);
+		} else if (tag == "Enemy") {
 			Debug.Log ("Shoot " + name + "!!!");
+
+			// Assume Enemy Die
+			Destroy (hit.transform.gameObject);
+			EnemyEvent evt = hit.transform.gameObject.GetComponent<EnemyEvent> ();
+			QuestManager.instance.CheckEnemyQuest (evt.enemyIndex, evt.enemyMain);
+
+		}
 	}
 }
