@@ -18,6 +18,9 @@ public class NPCResource : MonoBehaviour {
 		Dictionary<int, Dictionary<int,string>> newTalk = new Dictionary<int, Dictionary<int,string>> ();
 		newTalk [0] = new Dictionary<int, string> ();
 		newTalk[0][2] = "Talk back to Pay!";
+		newTalk [1] = new Dictionary<int, string> ();
+		newTalk[1][0] = "Clear Quest 0 already ? ok next to talk with pay again ?";
+		newTalk[1][1] = "OK! Let's GO!";
 		newNPC.SetTalk (talkD, newTalk);
 		npcData.Add (newNPC);
 
@@ -28,6 +31,8 @@ public class NPCResource : MonoBehaviour {
 		newTalk[0][0] = "Do you want to get Quest ?";
 		newTalk[0][1] = "Let's talk to Earth Major!";
 		newTalk[0][3] = "End Quest";
+		newTalk [1] = new Dictionary<int,string> ();
+		newTalk[1][2] = "Thank you mike! (End Quest)";
 		newNPC.SetTalk (talkD, newTalk);
 		npcData.Add (newNPC);
 //

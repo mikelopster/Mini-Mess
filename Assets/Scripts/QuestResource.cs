@@ -22,12 +22,12 @@ public class QuestResource : MonoBehaviour {
 		instance = this;
 
 		// Create Resource
-		newQuest = new Quest(50f,2000f,new List<int>(new int[]{1,0,1}));
+		newQuest = new Quest(50f,2000f,new List<int>(new int[]{1,0,1}),new List<int>(new int[]{1}));
 		questData.Add (newQuest);
 		questStatus.Add (0);
 		questNPC.Add (1);
 
-		newQuest = new Quest(100f,200f,new List<int>(new int[]{0,1}));
+		newQuest = new Quest(100f,200f,new List<int>(new int[]{0,1}),new List<int>());
 		questData.Add (newQuest);
 		questStatus.Add (-1);
 		questNPC.Add (0);
@@ -56,6 +56,10 @@ public class QuestResource : MonoBehaviour {
 	public void SetQuestStatus(int qIndex, int qStatus, int qNPC) {
 		questStatus [qIndex] = qStatus;
 		questNPC [qIndex] = qNPC;
+	}
+
+	public void UnlockQuest(int qIndex) {
+		questStatus [qIndex] = 0;
 	}
 
 	public Quest LoadQuest(int qIndex) {
