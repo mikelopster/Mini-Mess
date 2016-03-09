@@ -10,7 +10,7 @@ public class UserController_test : MonoBehaviour
 		public float forwardVel = 7;
 		public float sideVel = 7;
 		public float jumpVel = 10;
-		public float distToGrounded = 0.6f;
+		public float distToGrounded = 0.51f;
 		public float distToFace = 2;
 		public LayerMask ground;
 	}
@@ -144,7 +144,6 @@ public class UserController_test : MonoBehaviour
 		{
 			//jump
 			velocity.y = moveSetting.jumpVel;
-			Debug.Log ("Jump");
 		} 
 		else if (jumpInput == 0 && Grounded ()) 
 		{
@@ -180,7 +179,6 @@ public class UserController_test : MonoBehaviour
 		Debug.DrawRay(transform.position + mid, fwd * moveSetting.distToFace, Color.green);
 		if (Physics.Raycast (transform.position + mid, fwd, out hit , moveSetting.distToFace)) 
 		{
-//			Debug.Log ("Face : " + hit.transform.name);
 			if (clickInput) Action (hit);
 		}
 	}
