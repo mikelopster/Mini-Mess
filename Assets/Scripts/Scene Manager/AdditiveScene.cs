@@ -18,7 +18,7 @@ public class AdditiveScene : MonoBehaviour {
 
 	IEnumerator LoadAdditiveScene () {
 		yield return new WaitForSeconds (0.1f);
-		SceneManager.LoadScene (name, LoadSceneMode.Additive);
+		SceneManager.LoadSceneAsync (name, LoadSceneMode.Additive);
 	}
 
 	IEnumerator UnLoadAdditiveScene () {

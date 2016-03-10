@@ -68,6 +68,7 @@ PlayerSettings:
   n3dsEnableSharedListOpt: 1
   n3dsEnableVSync: 0
   uiUse16BitDepthBuffer: 0
+  ignoreAlphaClear: 0
   xboxOneResolution: 0
   ps3SplashScreen: {fileID: 0}
   videoMemoryForVertexBuffers: 0
@@ -95,19 +96,7 @@ PlayerSettings:
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   virtualRealitySupported: 0
-<<<<<<< HEAD
-  productGUID: 31bd1e9aeeb8b4c6bb3e400517aa7406
-=======
-<<<<<<< HEAD
-  productGUID: fc2a938cfd83d71478b40b4e7c4039ef
-=======
-<<<<<<< HEAD
-  productGUID: 02d1dc0e48db344a592a92265c454a1e
-=======
-  productGUID: b08c2f117153c419ca67a58c7fc886a1
->>>>>>> 13f896c951a2986325126b56a3a370972182c92d
->>>>>>> origin/master
->>>>>>> e673e552fc3f6ee8ebe756099b63623f2d3bc240
+  productGUID: a4ff87d3e7bc24eaeb630187339a08a4
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
@@ -145,6 +134,9 @@ PlayerSettings:
   iPadLandscapeSplashScreen: {fileID: 0}
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   appleTVSplashScreen: {fileID: 0}
+  tvOSSmallIconLayers: []
+  tvOSLargeIconLayers: []
+  tvOSTopShelfImageLayers: []
   iOSLaunchScreenType: 0
   iOSLaunchScreenPortrait: {fileID: 0}
   iOSLaunchScreenLandscape: {fileID: 0}
@@ -264,7 +256,7 @@ PlayerSettings:
   ps4ApplicationParam4: 0
   ps4DownloadDataSize: 0
   ps4GarlicHeapSize: 2048
-  ps4Passcode: qBlQ9wQj99nsQzldVI5ZuGXbEWRK5RhR
+  ps4Passcode: bEWRK5RhRXdCdG5nG5azdNMK66MuCV6G
   ps4pnSessions: 1
   ps4pnPresence: 1
   ps4pnFriends: 1
@@ -301,7 +293,7 @@ PlayerSettings:
   psp2LiveAreaTrialPath: 
   psp2PatchChangeInfoPath: 
   psp2PatchOriginalPackage: 
-  psp2PackagePassword: XdCdG5nG5azdNMK66MuCV6GXi5xr84P2
+  psp2PackagePassword: Xi5xr84P2R391UXaLHbavJvFZGfO47XW
   psp2KeystoneFile: 
   psp2MemoryExpansionMode: 0
   psp2DRMType: 0
