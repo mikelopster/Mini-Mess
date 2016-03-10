@@ -10,12 +10,13 @@ public class PlayerResource : MonoBehaviour {
 		yield return new WaitForSeconds (5);
 		transform.position = GameObject.FindGameObjectWithTag ("Savepoint").transform.position;
 		transform.Rotate (0, 0, 0);
-		HP = 100;
+		HP = 50;
+		ResourceManager.instance.SetHP (HP);
 	}
 
 	public void Dead ()
 	{
-		transform.Rotate (90, 0, 0);
+		transform.Rotate (90f, 0, 0);
 		StartCoroutine(WaitForDead());
 	}
 
@@ -24,6 +25,8 @@ public class PlayerResource : MonoBehaviour {
 		if (HP > 0) 
 		{
 			HP -= damage;
+			ResourceManager.instance.SetHP (HP);
+
 			if (HP <= 0)
 				Dead ();
 		}
