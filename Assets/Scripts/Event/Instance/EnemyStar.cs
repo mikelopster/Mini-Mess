@@ -18,11 +18,11 @@ public class EnemyStar : MonoBehaviour {
 	void Awake() {
 		instance = this;
 	}
-	// Use this for initialization
-	void Start () {
+
+	void Start() {
+		Mike = GameObject.FindWithTag("Player").transform;
 		ClearArmy ();
 	}
-	
 	// Update is called once per frame
 	void Update () {
 		ArmyMovement (BattleArmy);

@@ -15,6 +15,7 @@ public class EnemyAttacking : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		onEnabled = false;
+		Mike = GameObject.FindWithTag ("Player").transform;
 	}
 	
 	// Update is called once per frame
@@ -25,7 +26,7 @@ public class EnemyAttacking : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col) {
-		if (col.gameObject.tag == "Main Character") {
+		if (col.gameObject.tag == "Player") {
 			Debug.Log(col.gameObject.tag);
 			onEnabled = true;
 //			Debug.Log ("Trigger!");
@@ -33,7 +34,7 @@ public class EnemyAttacking : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider col) {
-		if (col.gameObject.tag == "Main Character") {
+		if (col.gameObject.tag == "Player") {
 			onEnabled = false;
 			Debug.Log ("Trigger Exit");
 		}

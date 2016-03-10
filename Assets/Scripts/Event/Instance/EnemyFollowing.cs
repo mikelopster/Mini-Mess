@@ -17,6 +17,10 @@ public class EnemyFollowing : MonoBehaviour {
 	void Awake () {
 		instance = this;
 	}
+
+	void Start() {
+		Mike = GameObject.FindWithTag("Player").transform;
+	}
 	
 	// Update is called once per frame
 	void Update () {
