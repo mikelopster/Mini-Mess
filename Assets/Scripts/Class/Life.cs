@@ -14,6 +14,13 @@ public class Life : MonoBehaviour {
 	public void Dead ()
 	{
 		EnemyFollowing.instance.RemoveFollowing (transform);
+
+		// Call Quest
+		EnemyEvent evt = this.gameObject.GetComponent<EnemyEvent> ();
+
+		if(evt != null)
+			QuestManager.instance.CheckEnemyQuest (evt.enemyIndex, evt.enemyMain);
+
 		transform.Rotate (-90, 0, 0);
 		StartCoroutine(WaitForDead());
 	}
@@ -35,4 +42,5 @@ public class Life : MonoBehaviour {
 	{
 		HP += curePoint;
 	}
+		
 }
