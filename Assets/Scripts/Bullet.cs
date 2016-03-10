@@ -6,20 +6,17 @@ public class Bullet : MonoBehaviour {
 	private float startTime;
 	public int damage = 10;
 
-	void Start()
-	{
+	void Start() {
 		startTime = Time.time;
 	}
 
-	void FixedUpdate()
-	{
+	void FixedUpdate() {
 		transform.Translate(Vector3.forward * speed * Time.deltaTime);
 		if (Time.time - startTime > 5)
 			Destroy (gameObject);
 	}
 
-	void OnCollisionEnter (Collision col)
-	{
+	void OnCollisionEnter (Collision col) {
 		if (col.transform.tag == "Enemy") 
 		{
 			col.gameObject.GetComponent<Life> ().TakeDamage (damage);

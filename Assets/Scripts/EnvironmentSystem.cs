@@ -4,12 +4,19 @@ using System.Collections.Generic;
 
 public class EnvironmentSystem : MonoBehaviour {
 
+	public static EnvironmentSystem instance;
+
 	public List<Transform> environmentEasyMovement = new List<Transform> ();
-	public List<Transform> environmentPathMovement = new List<Transform> ();
+	public List<Transform> environmentroadPath1Movement = new List<Transform> ();
+	public List<Transform> TrainObj;
 
 	// Path
-	public int[] nearestPath;
+	int[] nearestroadPath1;
 	public List<Transform> roadPath1 = new List<Transform>();
+
+	// Railroad
+	int[] railroadIndex = new int[1];
+	public List<Transform> railroadPath = new List<Transform>();
 
 	//values for internal use
 	private Quaternion _lookRotation;
@@ -19,8 +26,12 @@ public class EnvironmentSystem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		nearestPath = new int[environmentPathMovement.Count];
-		SearchNearestPath ();
+		instance = this;
+
+		railroadIndex[0] = 0;
+		// Create Path
+		nearestroadPath1 = SearchNearestPath (environmentroadPath1Movement,roadPath1);
+
 
 		StartCoroutine (TurnAround());
 	}
@@ -28,7 +39,8 @@ public class EnvironmentSystem : MonoBehaviour {
 	void Update() {
 		// For Easy Movement
 		MoveForward (direction);
-		MoveToPath ();
+		MoveToPath (environmentroadPath1Movement,roadPath1,nearestroadPath1);
+		MoveToPath (TrainObj,railroadPath, railroadIndex);
 	}
 
 
@@ -53,18 +65,18 @@ public class EnvironmentSystem : MonoBehaviour {
 	}
 
 	// Move Path
-	void SearchNearestPath() {
+	int[] SearchNearestPath(List<Transform> environmentPathObj, List<Transform> rPath) {
 		float nearP = 1000f;
 		int index = -1;
+		int[] nearestPath = new int[environmentPathObj.Count];
 
-
-		for (int i = 0; i < environmentPathMovement.Count; i++) {
+		for (int i = 0; i < environmentPathObj.Count; i++) {
 			// Loop All Object
 			nearP = 1000f;
 			index = -1;
-			for (int j = 0; j < roadPath1.Count; j++) {
+			for (int j = 0; j < rPath.Count; j++) {
 				// Loop All Path
-				float dist = Vector3.Distance(environmentPathMovement[i].position,roadPath1[j].position);
+				float dist = Vector3.Distance(environmentPathObj[i].position,rPath[j].position);
 
 				if (dist < nearP) {
 					nearP = dist;
@@ -73,23 +85,32 @@ public class EnvironmentSystem : MonoBehaviour {
 			}
 			nearestPath [i] = index;
 		}
+
+		return nearestPath;
 	}
 
-	void MoveToPath() {
-		for (int i = 0; i < environmentPathMovement.Count; i++) {
-			
+	void MoveToPath(List<Transform> environmentPathObj, List<Transform> rPath, int[] nearestP) {
+		
+		for (int i = 0; i < environmentPathObj.Count; i++) {
+			Debug.Log (environmentPathObj [i].gameObject.name);
+			Vector3 targetPosition = new Vector3 (rPath [nearestP [i]].position.x, environmentPathObj [i].position.y, rPath [nearestP [i]].position.z);
+			environmentPathObj [i].position = Vector3.MoveTowards (environmentPathObj [i].position, targetPosition , 2f * Time.deltaTime);
 
-				
-			Vector3 targetPosition = new Vector3 (roadPath1 [nearestPath [i]].position.x, environmentPathMovement [i].position.y, roadPath1 [nearestPath [i]].position.z);
-			environmentPathMovement [i].position = Vector3.MoveTowards (environmentPathMovement [i].position, targetPosition , 2f * Time.deltaTime);
-
-			if ((roadPath1 [nearestPath [i]].position.x == environmentPathMovement [i].position.x) && (roadPath1 [nearestPath [i]].position.z == environmentPathMovement [i].position.z)) {
-				nearestPath [i] = (nearestPath [i] + 1) % (roadPath1.Count);
+			// Check end path
+			if ((rPath [nearestP [i]].position.x == environmentPathObj [i].position.x) && (rPath [nearestP [i]].position.z == environmentPathObj [i].position.z)) {
+				nearestP [i] = (nearestP [i] + 1) % (rPath.Count);
 			} 
 
-			_direction = (targetPosition - environmentPathMovement [i].position).normalized;
+			_direction = (targetPosition - environmentPathObj [i].position).normalized;
 			_lookRotation = Quaternion.LookRotation(_direction);
-			environmentPathMovement [i].rotation = Quaternion.Slerp(environmentPathMovement [i].rotation, _lookRotation, Time.deltaTime * 2f);
+			environmentPathObj [i].rotation = Quaternion.Slerp(environmentPathObj [i].rotation, _lookRotation, Time.deltaTime * 2f);
+		}
+	}
+
+	public void RemoveEnvironmentControl(Transform tObject) {
+		int index = environmentEasyMovement.IndexOf(tObject);
+		if (index != -1) {
+			environmentEasyMovement.RemoveAt (index);
 		}
 	}
 

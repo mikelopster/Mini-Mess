@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Life : MonoBehaviour {
 	public int HP = 100;
+	public float upStar = 0.5f;
 
 	IEnumerator WaitForDead()
 	{
@@ -12,12 +13,19 @@ public class Life : MonoBehaviour {
 
 	public void Dead ()
 	{
+		EnemyFollowing.instance.RemoveFollowing (transform);
 		transform.Rotate (-90, 0, 0);
 		StartCoroutine(WaitForDead());
 	}
 
-	public void TakeDamage (int damage)
-	{
+	public void TakeDamage (int damage) {
+		// Add Following Player
+		EnemyFollowing.instance.AddFollowing (transform);
+		ResourceManager.instance.SetStar (upStar);
+
+		// Remove from Environment controller
+		EnvironmentSystem.instance.RemoveEnvironmentControl (transform);
+
 		HP -= damage;
 		if (HP < 0)
 			Dead ();

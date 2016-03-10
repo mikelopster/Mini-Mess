@@ -71,6 +71,7 @@ public class UserController_test : MonoBehaviour
 	{
 		// Set Turn as default
 		openTurn = true;
+
 		// Set mouse in center
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = true;
@@ -199,7 +200,8 @@ public class UserController_test : MonoBehaviour
 			// Assume Enemy Die
 			Destroy (hit.transform.gameObject);
 			EnemyEvent evt = hit.transform.gameObject.GetComponent<EnemyEvent> ();
-			QuestManager.instance.CheckEnemyQuest (evt.enemyIndex, evt.enemyMain);
+			if(evt != null)
+				QuestManager.instance.CheckEnemyQuest (evt.enemyIndex, evt.enemyMain);
 
 		}
 	}
