@@ -1,15 +1,27 @@
 fileFormatVersion: 2
-guid: d89dc021a34fe4b939827ceeae3b9063
-timeCreated: 1457588165
+guid: d79a3f459ee2e4c5a8f61f4cc3a7a83f
+timeCreated: 1457588159
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Plane
+    100000: Cloud
+    100002: Cube
+    100004: Horizon
+    100006: //RootNode
+    400000: Cloud
+    400002: Cube
+    400004: Horizon
+    400006: //RootNode
+    2300000: Cloud
+    2300002: Cube
+    2300004: Horizon
+    3300000: Cloud
+    3300002: Cube
+    3300004: Horizon
+    4300000: Horizon
+    4300002: Cloud
+    4300004: Cube
     7400000: Default Take
     9500000: //RootNode
   materials:
