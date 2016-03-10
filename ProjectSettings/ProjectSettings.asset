@@ -10,7 +10,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: minimess
+  productName: MiniMess
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
@@ -96,11 +96,7 @@ PlayerSettings:
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   virtualRealitySupported: 0
-<<<<<<< HEAD
-  productGUID: 700c577ccb07128458e9c579da85a845
-=======
-  productGUID: d71f6e266105148979c0ec683e7cc34e
->>>>>>> origin/master
+  productGUID: 27fd28020262b47f28dd54cc9da557f3
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
@@ -173,13 +169,7 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 0}
-  m_BuildTargetIcons:
-  - m_BuildTarget: 
-    m_Icons:
-    - serializedVersion: 2
-      m_Icon: {fileID: 0}
-      m_Width: 128
-      m_Height: 128
+  m_BuildTargetIcons: []
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
   webPlayerTemplate: APPLICATION:Default
@@ -266,11 +256,7 @@ PlayerSettings:
   ps4ApplicationParam4: 0
   ps4DownloadDataSize: 0
   ps4GarlicHeapSize: 2048
-<<<<<<< HEAD
-  ps4Passcode: frAQBc8Wsa1xVPfvJcrgRYwTiizs2trQ
-=======
-  ps4Passcode: V6GXi5xr84P2R391UXaLHbavJvFZGfO4
->>>>>>> origin/master
+  ps4Passcode: rtRMwDyKeh2WG4QnhYakXELplAzACK0v
   ps4pnSessions: 1
   ps4pnPresence: 1
   ps4pnFriends: 1
@@ -307,11 +293,7 @@ PlayerSettings:
   psp2LiveAreaTrialPath: 
   psp2PatchChangeInfoPath: 
   psp2PatchOriginalPackage: 
-<<<<<<< HEAD
-  psp2PackagePassword: F69AzBlax3CF3EDNhm3soLBPh71Yexui
-=======
-  psp2PackagePassword: 7XWS2qVOw5lxuBEBNue7b9PZS0hoI6pg
->>>>>>> origin/master
+  psp2PackagePassword: fcydE54ZUcRV55ktDtEzrpWXRwslVYAC
   psp2KeystoneFile: 
   psp2MemoryExpansionMode: 0
   psp2DRMType: 0
@@ -352,14 +334,14 @@ PlayerSettings:
     16: CROSS_PLATFORM_INPUT;MOBILE_INPUT
     17: MOBILE_INPUT
     20: MOBILE_INPUT
-  metroPackageName: minimess
+  metroPackageName: MiniMess
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: minimess
+  metroApplicationDescription: MiniMess
   wsaImages: {}
   metroTileShortName: 
   metroCommandLineArgsFile: 
