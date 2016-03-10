@@ -117,11 +117,14 @@ public class UserController_test : MonoBehaviour
 
 	void Update()
 	{
-		GetInput ();
-//		if(openTurn){
-		  Turn ();
-		  Face ();
-//		}
+		if (GetComponent<PlayerResource> ().HP > 0) 
+		{
+			GetInput ();
+	//		if(openTurn){
+			  Turn ();
+			  Face ();
+	//		}
+		}
 	}
 
 	void FixedUpdate()
