@@ -109,8 +109,9 @@ public class UserController_test : MonoBehaviour
 		GetInput ();
 		if(openTurn){
 		  Turn ();
+		  Face ();
 		}
-		Face ();
+
 	}
 
 	void FixedUpdate()
@@ -193,6 +194,7 @@ public class UserController_test : MonoBehaviour
 			NPCEvent evt = hit.transform.gameObject.GetComponent<NPCEvent> ();
 			QuestManager.instance.CheckQuest (evt.npcIndex, evt.npcMain);
 			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
 			openTurn = false;
 		}
 		else if (tag == "Enemy") 

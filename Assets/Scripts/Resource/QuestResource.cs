@@ -15,11 +15,20 @@ public class QuestResource : MonoBehaviour {
 	float bounty;
 	float gold;
 	Quest newQuest;
+	string qStatus;
 
 	// Use this for initialization
 	void Awake () {
 
 		instance = this;
+
+		// NPC
+		/*
+		 0: Kitti
+		 1: Earth
+		 2: Ben
+		 3: Pay
+		 */
 
 		// Create Resourcei
 		newQuest = new Quest(50f,2000f,new List<int>(new int[]{1,0,1}),new List<int>(),new List<string>(new string[]{"Talk","Talk","Talk"}));
@@ -39,8 +48,10 @@ public class QuestResource : MonoBehaviour {
 	}
 
 	void Update() {
-		Debug.Log ("Quest 0: Order=" + questStatus[0] + ",NPC=" + questNPC[0] + ",Type=" + questType[0]);
-		Debug.Log ("Quest 1: Order=" + questStatus[1] + ",NPC=" + questNPC[1] + ",Type=" + questType[1]);
+		qStatus = "";
+		qStatus += "Quest 0: Order=" + questStatus [0] + ",NPC=" + questNPC [0] + ",Type=" + questType [0] + "\n";
+		qStatus += "Quest 1: Order=" + questStatus [1] + ",NPC=" + questNPC [1] + ",Type=" + questType [1];
+		Debug.Log (qStatus);
 	}
 
 	public int[] GetQuestIndex(int npcIndex) {
