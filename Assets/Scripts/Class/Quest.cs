@@ -48,5 +48,9 @@ public class Quest {
 		return unlockQuestList;
 	}
 
+	public float GetGold() {
+		return this.gold;
+	}
+
 
 }

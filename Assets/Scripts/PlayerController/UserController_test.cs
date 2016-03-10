@@ -117,14 +117,11 @@ public class UserController_test : MonoBehaviour
 
 	void Update()
 	{
-		if (GetComponent<PlayerResource> ().HP > 0) 
-		{
-			GetInput ();
-			if (openTurn) {
-				Turn ();
-				Face ();
-			}
-		}
+		GetInput ();
+//		if(openTurn){
+		  Turn ();
+		  Face ();
+//		}
 	}
 
 	void FixedUpdate()
@@ -208,24 +205,16 @@ public class UserController_test : MonoBehaviour
 		if (tag == "NPC")
 		{
 			NPCEvent evt = hit.transform.gameObject.GetComponent<NPCEvent> ();
-			QuestManager.instance.CheckQuest (evt.npcIndex, evt.npcMain);
+			QuestManager questM = GameObject.Find ("DataResource").GetComponent<QuestManager> ();
+			questM.CheckQuest (evt.npcIndex, evt.npcMain);
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = true;
 			openTurn = false;
 		}
-		else if (tag == "Enemy") 
-		{
-			// Assume Enemy Die
-			Destroy (hit.transform.gameObject);
-			EnemyEvent evt = hit.transform.gameObject.GetComponent<EnemyEvent> ();
-			if(evt != null)
-				QuestManager.instance.CheckEnemyQuest (evt.enemyIndex, evt.enemyMain);
-
-		}
 	}
 
 	public void OpenMouseTurn() {
-		openTurn = true;
+//		openTurn = true;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 

@@ -22,29 +22,44 @@ public class NPCResource : MonoBehaviour {
 
 
 		NPC newNPC = new NPC ("Kitti");
-		string talkD = "Hello Mike, want to join with me ?";
+		string talkD = "Hello. I'm major. I want to start a revolution!!!";
 		Dictionary<int, Dictionary<int,string>> newTalk = new Dictionary<int, Dictionary<int,string>> ();
-//		newTalk [0] = new Dictionary<int, string> ();
-//		newTalk[0][2] = "Talk back to Pay!";
-//		newTalk [1] = new Dictionary<int, string> ();
-//		newTalk[1][0] = "Clear Quest 0 already ? ok next to talk with pay again ?";
-//		newTalk[1][1] = "OK! Let's GO!";
+		newTalk [0] = new Dictionary<int, string> ();
+		newTalk[0][2] = "Kill General Claim, he is walking in vice city!";
+		newTalk[0][4] = "OK. You are a relovutioner.";
 		newNPC.SetTalk (talkD, newTalk);
 		npcData.Add (newNPC);
 
 		newNPC = new NPC ("Earth");
-		talkD = "What do you want to eat?";
+		talkD = "Hello Mike, want to join with me ?";
 		newTalk = new Dictionary<int, Dictionary<int,string>> ();
-//		newTalk [0] = new Dictionary<int, string> ();
-//		newTalk[0][0] = "Do you want to get Quest ?";
-//		newTalk[0][1] = "Let's talk to Earth Major!";
-//		newTalk[0][3] = "End Quest";
-//		newTalk [1] = new Dictionary<int,string> ();
-//		newTalk[1][3] = "Thank you mike! (End Quest)";
+		newTalk [0] = new Dictionary<int, string> ();
+		newTalk[0][0] = "Do you want to revolution?";
+		newTalk[0][1] = "Let's talk to Kitti, he is on a concert.";
 		newNPC.SetTalk (talkD, newTalk);
 		npcData.Add (newNPC);
+
+		newNPC = new NPC ("Ben");
+		talkD = "Want to handjob ?";
+		newTalk = new Dictionary<int, Dictionary<int,string>> ();
+		newTalk [1] = new Dictionary<int, string> ();
+		newTalk[1][2] = "Battle!";
+		newTalk[1][4] = "Great, you are strong!";
+		newNPC.SetTalk (talkD, newTalk);
+		npcData.Add (newNPC);
+
+		newNPC = new NPC ("Pay");
+		talkD = "You can get a ticker in the next version.";
+		newTalk = new Dictionary<int, Dictionary<int,string>> ();
+		newTalk [1] = new Dictionary<int, string> ();
+		newTalk[1][0] = "Do you want to test your power?";
+		newTalk[1][1] = "OK! Let's go to Ben.";
+		newNPC.SetTalk (talkD, newTalk);
+		npcData.Add (newNPC);
+
 	
 //
+		Debug.Log("LoadNPC");
 	}
 
 	public NPC LoadNPC(int index) {

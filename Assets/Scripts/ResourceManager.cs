@@ -6,13 +6,14 @@ public class ResourceManager : MonoBehaviour {
 
 	public static ResourceManager instance;
 	public Text starText;
+	public Text goldText;
 
 	public float star = 0;
-	public float gold;
+	public float gold = 0;
 	// Use this for initialization
 	void Start () {
 		instance = this;
-		gold = 1000f;
+		SetGold (1000f);
 		star = 0;
 	}
 	
@@ -27,6 +28,7 @@ public class ResourceManager : MonoBehaviour {
 			// Call Army!!
 			EnemyStar.instance.SpawnArmy (1);
 		} else if(star < 0) {
+			starText.text = "0";
 			EnemyStar.instance.ClearArmy ();
 		}
 
@@ -39,6 +41,11 @@ public class ResourceManager : MonoBehaviour {
 
 	public float GetStar() {
 		return star;
+	}
+
+	public void SetGold(float set_gold) {
+		gold += set_gold;
+		goldText.text = gold.ToString();
 	}
 
 }

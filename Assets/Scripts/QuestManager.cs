@@ -39,12 +39,17 @@ public class QuestManager : MonoBehaviour {
 				UIController.instance.TalkUIQuest(npcMain.GetName (), npcMain.GetTalkQuest(questPoint[0],questPoint[1]));
 			}else {
 				// Check Type Quest
-				string qType = currentQuest.GetCurrentQuestType (questPoint [1]);
+				string qType = currentQuest.GetCurrentQuestType (questPoint [1]-1);
+				Debug.Log (qType);
 
-				if(qType == "Talk"){
+				if (qType == "Talk") {
 					// Get to Next npc
-					UIController.instance.TalkUIDefault (npcMain.GetName (), currentNPC.GetTalkQuest(questPoint[0],questPoint[1]));
+					UIController.instance.TalkUIDefault (npcMain.GetName (), currentNPC.GetTalkQuest (questPoint [0], questPoint [1]));
 					UpdateQuest ();
+				} else {
+					// Talk Default
+					UIController.instance.TalkUIDefault (currentNPC.GetName (), currentNPC.GetTalkDefault ());
+					Debug.Log (currentNPC.GetName () + ": " + currentNPC.GetTalkDefault ());
 				}
 			}
 			
@@ -68,6 +73,8 @@ public class QuestManager : MonoBehaviour {
 			if(qType == "Enemy"){
 				Debug.Log ("Clear!");
 				UIController.instance.TalkUIDefault ("System", "You kill enemy in quest!");
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.visible = true;
 				UpdateQuest ();
 			}
 
@@ -100,6 +107,9 @@ public class QuestManager : MonoBehaviour {
 			// Unlock Next Quest
 			List<int> unlockL = currentQuest.GetUnlockList();
 			UpdateQuestList (unlockL);
+
+			// Collect Gold!
+			ResourceManager.instance.SetGold(currentQuest.GetGold());
 		}
 		
 	

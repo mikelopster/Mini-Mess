@@ -29,20 +29,19 @@ public class QuestResource : MonoBehaviour {
 		 2: Ben
 		 3: Pay
 		 */
+	
 
-		// Create Resourcei
-		newQuest = new Quest(50f,2000f,new List<int>(new int[]{1,0,1}),new List<int>(),new List<string>(new string[]{"Talk","Talk","Talk"}));
+		newQuest = new Quest (50f, 2000f, new List<int> (new int[]{1,0,0,0}), new List<int> (new int[]{1}), new List<string> (new string[]{"Talk","Talk","Enemy","Talk"}));
 		questData.Add (newQuest);
-		questStatus.Add (-1);
+		questStatus.Add (0);
 		questNPC.Add (1);
 		questType.Add ("Talk");
 
-		newQuest = new Quest(100f,200f,new List<int>(new int[]{0,0,1}),new List<int>(),new List<string>(new string[]{"Talk","Enemy","Talk"}));
+		newQuest = new Quest (50f, 2000f, new List<int> (new int[]{3,2,1,1}), new List<int> (), new List<string> (new string[]{"Talk","Talk","Enemy","Talk"}));
 		questData.Add (newQuest);
 		questStatus.Add (0);
-		questNPC.Add (0);
+		questNPC.Add (3);
 		questType.Add ("Talk");
-
 
 
 	}

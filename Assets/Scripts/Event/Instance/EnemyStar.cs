@@ -29,18 +29,18 @@ public class EnemyStar : MonoBehaviour {
 	}
 
 	public void SpawnArmy(int star) {
-		Debug.Log("Spawn Star: " + star);
+//		Debug.Log("Spawn Star: " + star);
 	
-		if (star == 1 && !ArmyTroop [star]) {
-			ArmyTroop [star] = true;
-			// Spawn Army1
-			Debug.Log("Spawn Army");
-
-			for (int i = 0; i < Army1.Count; i++) {
-				GameObject newArmy = (GameObject)Instantiate (Army1 [i], new Vector3 (Mike.position.x + 5f, Mike.position.y, Mike.position.z + 5f),Mike.rotation);
-				BattleArmy.Add (newArmy.transform);
-			}
-		}
+//		if (star == 1 && !ArmyTroop [star]) {
+//			ArmyTroop [star] = true;
+//			// Spawn Army1
+////			Debug.Log("Spawn Army");
+//
+//			for (int i = 0; i < Army1.Count; i++) {
+//				GameObject newArmy = (GameObject)Instantiate (Army1 [i], new Vector3 (Mike.position.x + 5f, Mike.position.y, Mike.position.z + 5f),Mike.rotation);
+//				BattleArmy.Add (newArmy.transform);
+//			}
+//		}
 	}
 
 	public void ClearArmy() {
