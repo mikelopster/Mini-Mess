@@ -7,8 +7,7 @@ public class UserController_test : MonoBehaviour
 	[System.Serializable]
 	public class MoveSettings
 	{
-		public float forwardVel = 7;
-		public float sideVel = 7;
+		public float walkVel = 7;
 		public float jumpVel = 10;
 		public float distToGrounded = 0.51f;
 		public float distToFace = 2;
@@ -28,6 +27,7 @@ public class UserController_test : MonoBehaviour
 		public string FORWARD_AXIS = "Vertical";
 		public string SIDE_AXIS = "Horizontal";
 		public string JUMP_AXIS = "Jump";
+		public string SELFIE = "Selfie";
 	}
 
 	[System.Serializable]
@@ -49,13 +49,14 @@ public class UserController_test : MonoBehaviour
 
 	Vector3 velocity = Vector3.zero;
 	Rigidbody rBody;
-	float forwardInput, sideInput, jumpInput;
+	float forwardInput, sideInput, jumpInput, selfieInput;
 	bool clickInput;
 	Quaternion originalRotation;
 	RaycastHit hit;
 	Vector3 fwd, dwn;
 	Vector3 mid = new Vector3 (0, 0.5f, 0);
 	bool openTurn;
+	Animator anim;
 
 	bool Grounded()
 	{
@@ -84,6 +85,7 @@ public class UserController_test : MonoBehaviour
 
 		forwardInput = sideInput = jumpInput = 0;
 		fwd = transform.TransformDirection(Vector3.forward);
+		anim = GetComponent<Animator> ();
 	}
 
 	void GetInput()
@@ -92,6 +94,10 @@ public class UserController_test : MonoBehaviour
 		sideInput = Input.GetAxis (inputSetting.SIDE_AXIS);
 		jumpInput = Input.GetAxisRaw (inputSetting.JUMP_AXIS);
 		clickInput = Input.GetMouseButtonDown (mouseSetting.LEFT_CLICK);
+		if (Input.GetAxis (inputSetting.SELFIE) > 0)
+			anim.SetBool ("selfie", true);
+		else
+			anim.SetBool ("selfie", false);
 	}
 
 	void Update()
@@ -108,7 +114,6 @@ public class UserController_test : MonoBehaviour
 	{
 		if (Grounded ()) {
 			Forward ();
-			Side ();
 		}
 		Jump ();
 
@@ -117,25 +122,26 @@ public class UserController_test : MonoBehaviour
 
 	void Forward()
 	{
-		if (Mathf.Abs (forwardInput) > inputSetting.inputDelay)
+		if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Selfie"))
 		{
-			//move
-			velocity.z = moveSetting.forwardVel * forwardInput;
+			if (Mathf.Abs (forwardInput) > inputSetting.inputDelay || Mathf.Abs (sideInput) > inputSetting.inputDelay) 
+			{
+				anim.SetBool ("walking", true);
+				velocity.z = moveSetting.walkVel * forwardInput;
+				velocity.x = moveSetting.walkVel * sideInput;
+			}
+			else 
+			{
+				anim.SetBool ("walking", false);
+				velocity.z = 0;
+				velocity.x = 0;
+			}
 		}
-		else
-			//zero velocity
+		else 
+		{
 			velocity.z = 0;
-	}
-
-	void Side()
-	{
-		if (Mathf.Abs (sideInput) > inputSetting.inputDelay)
-		{
-			velocity.x = moveSetting.sideVel * sideInput;
-		}
-		else
-			//zero velocity
 			velocity.x = 0;
+		}
 	}
 
 	void Jump()
