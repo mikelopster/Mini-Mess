@@ -107,10 +107,10 @@ public class UserController_test : MonoBehaviour
 	{
 
 		GetInput ();
-		if(openTurn){
+//		if(openTurn){
 		  Turn ();
 		  Face ();
-		}
+//		}
 
 	}
 
@@ -192,7 +192,8 @@ public class UserController_test : MonoBehaviour
 		if (tag == "NPC")
 		{
 			NPCEvent evt = hit.transform.gameObject.GetComponent<NPCEvent> ();
-			QuestManager.instance.CheckQuest (evt.npcIndex, evt.npcMain);
+			QuestManager questM = GameObject.Find ("DataResource").GetComponent<QuestManager> ();
+			questM.CheckQuest (evt.npcIndex, evt.npcMain);
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = true;
 			openTurn = false;
@@ -200,7 +201,7 @@ public class UserController_test : MonoBehaviour
 	}
 
 	public void OpenMouseTurn() {
-		openTurn = true;
+//		openTurn = true;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
