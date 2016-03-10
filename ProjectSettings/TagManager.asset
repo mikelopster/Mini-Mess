@@ -7,7 +7,7 @@ TagManager:
   - Enemy
   - NPC
   - Environment
-  - Main Character
+  - Player
   layers:
   - Default
   - TransparentFX

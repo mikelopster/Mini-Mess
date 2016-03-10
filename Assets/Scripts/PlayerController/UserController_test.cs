@@ -7,18 +7,12 @@ public class UserController_test : MonoBehaviour
 	[System.Serializable]
 	public class MoveSettings
 	{
-		public float forwardVel = 7;
-		public float sideVel = 7;
-		public float jumpVel = 10;
+		public float walkVel = 7;
+		public float jumpVel = 0.7f;
 		public float distToGrounded = 0.51f;
+		public float distForWalk = 0.7f;
 		public float distToFace = 2;
 		public LayerMask ground;
-	}
-
-	[System.Serializable]
-	public class PhysSettings
-	{
-		public float downAccel = 0.75f;
 	}
 
 	[System.Serializable]
@@ -28,6 +22,7 @@ public class UserController_test : MonoBehaviour
 		public string FORWARD_AXIS = "Vertical";
 		public string SIDE_AXIS = "Horizontal";
 		public string JUMP_AXIS = "Jump";
+		public string SELFIE = "Selfie";
 	}
 
 	[System.Serializable]
@@ -43,25 +38,33 @@ public class UserController_test : MonoBehaviour
 		
 
 	public MoveSettings moveSetting = new MoveSettings();
-	public PhysSettings physSetting = new PhysSettings();
 	public InputSettings inputSetting = new InputSettings();
 	public MouseSettings mouseSetting = new MouseSettings();
 
 	Vector3 velocity = Vector3.zero;
 	Rigidbody rBody;
-	float forwardInput, sideInput, jumpInput;
+	float forwardInput, sideInput, jumpInput, selfieInput;
 	bool clickInput;
 	Quaternion originalRotation;
 	RaycastHit hit;
-	Vector3 fwd, dwn;
+	Vector3 fwd, dwn_ground, dwn_walk;
 	Vector3 mid = new Vector3 (0, 0.5f, 0);
 	bool openTurn;
+	Animator anim;
+	Vector3 velo;
 
 	bool Grounded()
 	{
-		dwn = transform.TransformDirection (Vector3.down);
-		Debug.DrawRay(transform.position + mid, dwn * moveSetting.distToGrounded, Color.blue);
-		return Physics.Raycast (transform.position + mid, dwn, moveSetting.distToGrounded, moveSetting.ground);
+		dwn_ground = transform.TransformDirection (Vector3.down);
+		Debug.DrawRay(transform.position + mid, dwn_ground * moveSetting.distToGrounded, Color.blue);
+		return Physics.Raycast (transform.position + mid, dwn_ground, moveSetting.distToGrounded, moveSetting.ground);
+	}
+
+	bool CanWalk()
+	{
+		dwn_walk = transform.TransformDirection (Vector3.down);
+		Debug.DrawRay(transform.position + mid, dwn_walk * moveSetting.distForWalk, Color.red);
+		return Physics.Raycast (transform.position + mid, dwn_walk, moveSetting.distForWalk, moveSetting.ground);
 	}
 
 	void Start()
@@ -82,9 +85,10 @@ public class UserController_test : MonoBehaviour
 		}	
 		else
 			Debug.LogError ("The Character needs a rigidbody.");
-
+		
 		forwardInput = sideInput = jumpInput = 0;
 		fwd = transform.TransformDirection(Vector3.forward);
+		anim = GetComponent<Animator> ();
 	}
 
 	void GetInput()
@@ -93,6 +97,10 @@ public class UserController_test : MonoBehaviour
 		sideInput = Input.GetAxis (inputSetting.SIDE_AXIS);
 		jumpInput = Input.GetAxisRaw (inputSetting.JUMP_AXIS);
 		clickInput = Input.GetMouseButtonDown (mouseSetting.LEFT_CLICK);
+		if (Input.GetAxis (inputSetting.SELFIE) > 0)
+			anim.SetBool ("selfie", true);
+		else
+			anim.SetBool ("selfie", false);
 	}
 
 	void Update()
@@ -101,62 +109,54 @@ public class UserController_test : MonoBehaviour
 		GetInput ();
 		if(openTurn){
 		  Turn ();
+		  Face ();
 		}
-		Face ();
+
 	}
 
 	void FixedUpdate()
 	{
-		if (Grounded ()) {
+		if (CanWalk()) {
 			Forward ();
-			Side ();
 		}
 		Jump ();
 
-		rBody.velocity = transform.TransformDirection (velocity);
+		velo = rBody.velocity;
+		velo.x = velocity.x;
+		velo.z = velocity.z;
+		rBody.velocity = transform.TransformDirection (velo);
 	}
 
 	void Forward()
 	{
-		if (Mathf.Abs (forwardInput) > inputSetting.inputDelay)
+		if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Selfie"))
 		{
-			//move
-			velocity.z = moveSetting.forwardVel * forwardInput;
+			if (Mathf.Abs (forwardInput) > inputSetting.inputDelay || Mathf.Abs (sideInput) > inputSetting.inputDelay) 
+			{
+				anim.SetBool ("walking", true);
+				velocity.z = moveSetting.walkVel * forwardInput;
+				velocity.x = moveSetting.walkVel * sideInput;
+			}
+			else 
+			{
+				anim.SetBool ("walking", false);
+				velocity.z = 0;
+				velocity.x = 0;
+			}
 		}
-		else
-			//zero velocity
+		else 
+		{
+			anim.SetBool ("walking", false);
 			velocity.z = 0;
-	}
-
-	void Side()
-	{
-		if (Mathf.Abs (sideInput) > inputSetting.inputDelay)
-		{
-			velocity.x = moveSetting.sideVel * sideInput;
-		}
-		else
-			//zero velocity
 			velocity.x = 0;
+		}
 	}
 
 	void Jump()
 	{
-		if (jumpInput > 0 && Grounded ())
+		if (jumpInput > 0 && CanWalk ()) 
 		{
-			//jump
-			velocity.y = moveSetting.jumpVel;
-		} 
-		else if (jumpInput == 0 && Grounded ()) 
-		{
-			//zero out our velocity.y
-			velocity.y = 0;
-//			Debug.Log ("Grounded");
-		} 
-		else 
-		{
-			//decrease velocity.y
-			velocity.y -= physSetting.downAccel;
-//			Debug.Log ("Jumping");
+			rBody.AddForce (0, moveSetting.jumpVel, 0, ForceMode.Impulse);
 		}
 	}
 
@@ -189,26 +189,25 @@ public class UserController_test : MonoBehaviour
 		string tag = hit.transform.tag;
 		string name = hit.transform.name;
 
-		if (tag == "NPC") {
+		if (tag == "NPC")
+		{
 			NPCEvent evt = hit.transform.gameObject.GetComponent<NPCEvent> ();
-			Debug.Log ("Talk with " + name + "." + evt.npcIndex.ToString ());
 			QuestManager.instance.CheckQuest (evt.npcIndex, evt.npcMain);
 			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
 			openTurn = false;
-		} else if (tag == "Enemy") {
-			Debug.Log ("Shoot " + name + "!!!");
-
-			// Assume Enemy Die
-			Destroy (hit.transform.gameObject);
-			EnemyEvent evt = hit.transform.gameObject.GetComponent<EnemyEvent> ();
-			if(evt != null)
-				QuestManager.instance.CheckEnemyQuest (evt.enemyIndex, evt.enemyMain);
-
 		}
 	}
 
 	public void OpenMouseTurn() {
 		openTurn = true;
 		Cursor.lockState = CursorLockMode.Locked;
+	}
+
+	void OnCollisionEnter (Collision col)
+	{
+		anim.SetBool ("walking", false);
+		velocity.x = 0;
+		velocity.z = 0;
 	}
 }

@@ -6,9 +6,13 @@ public class EnvironmentSystem : MonoBehaviour {
 
 	public static EnvironmentSystem instance;
 
-	public List<Transform> environmentEasyMovement = new List<Transform> ();
-	public List<Transform> environmentroadPath1Movement = new List<Transform> ();
+	public List<Transform> environmentEasyXMovement = new List<Transform> ();
+	public List<Transform> environmentEasyZMovement = new List<Transform> ();
+
+	public List<Transform> environmentRoadPath1Movement = new List<Transform> ();
+	public List<Transform> environmentRandomPathMovement = new List<Transform> ();
 	public List<Transform> TrainObj;
+
 
 	// Path
 	int[] nearestroadPath1;
@@ -17,6 +21,10 @@ public class EnvironmentSystem : MonoBehaviour {
 	// Railroad
 	int[] railroadIndex = new int[1];
 	public List<Transform> railroadPath = new List<Transform>();
+
+	// Random Path
+	int[] nearestRandom;
+	public List<Transform> allTownPath = new List<Transform>();
 
 	//values for internal use
 	private Quaternion _lookRotation;
@@ -30,7 +38,8 @@ public class EnvironmentSystem : MonoBehaviour {
 
 		railroadIndex[0] = 0;
 		// Create Path
-		nearestroadPath1 = SearchNearestPath (environmentroadPath1Movement,roadPath1);
+		nearestroadPath1 = SearchNearestPath (environmentRoadPath1Movement,roadPath1);
+		nearestRandom = SearchNearestPath (environmentRandomPathMovement, allTownPath);
 
 
 		StartCoroutine (TurnAround());
@@ -38,9 +47,12 @@ public class EnvironmentSystem : MonoBehaviour {
 
 	void Update() {
 		// For Easy Movement
-		MoveForward (direction);
-		MoveToPath (environmentroadPath1Movement,roadPath1,nearestroadPath1);
-		MoveToPath (TrainObj,railroadPath, railroadIndex);
+		MoveForward (direction,2f);
+		// Move to path
+		MoveToPath (environmentRoadPath1Movement,roadPath1,nearestroadPath1,5f);
+		MoveToPath (TrainObj,railroadPath, railroadIndex,1f);
+		MoveToPath (environmentRandomPathMovement,allTownPath,nearestRandom,2f,true);
+
 	}
 
 
@@ -49,8 +61,12 @@ public class EnvironmentSystem : MonoBehaviour {
 	IEnumerator TurnAround() {
 		while (true) {
 			yield return new WaitForSeconds(5);
-
-			foreach (Transform tCar in environmentEasyMovement) {
+			// X Movement
+			foreach (Transform tCar in environmentEasyXMovement) {
+				tCar.Rotate(new Vector3(0,180f,0)); 
+			}
+			// Z Movement
+			foreach (Transform tCar in environmentEasyZMovement) {
 				tCar.Rotate(new Vector3(0,180f,0)); 
 			}
 
@@ -58,10 +74,18 @@ public class EnvironmentSystem : MonoBehaviour {
 		}
 	}
 
-	void MoveForward(int direct) {
-		foreach (Transform tCar in environmentEasyMovement) {
-			tCar.position = new Vector3 (tCar.position.x + (2f* direct) * Time.deltaTime , tCar.position.y, tCar.position.z);
+	void MoveForward(int direct,float speed) {
+
+		// X Movement
+		foreach (Transform tCar in environmentEasyXMovement) {
+			tCar.position = new Vector3 (tCar.position.x + (speed* direct) * Time.deltaTime , tCar.position.y, tCar.position.z);
 		}
+
+		// Z Movement
+		foreach (Transform tCar in environmentEasyZMovement) {
+			tCar.position = new Vector3 (tCar.position.x , tCar.position.y, tCar.position.z + (speed* direct) * Time.deltaTime);
+		}
+
 	}
 
 	// Move Path
@@ -89,16 +113,23 @@ public class EnvironmentSystem : MonoBehaviour {
 		return nearestPath;
 	}
 
-	void MoveToPath(List<Transform> environmentPathObj, List<Transform> rPath, int[] nearestP) {
+	void MoveToPath(List<Transform> environmentPathObj, List<Transform> rPath, int[] nearestP,float speed,bool random=false) {
 		
 		for (int i = 0; i < environmentPathObj.Count; i++) {
 			Debug.Log (environmentPathObj [i].gameObject.name);
 			Vector3 targetPosition = new Vector3 (rPath [nearestP [i]].position.x, environmentPathObj [i].position.y, rPath [nearestP [i]].position.z);
-			environmentPathObj [i].position = Vector3.MoveTowards (environmentPathObj [i].position, targetPosition , 2f * Time.deltaTime);
+			environmentPathObj [i].position = Vector3.MoveTowards (environmentPathObj [i].position, targetPosition , speed * Time.deltaTime);
 
 			// Check end path
 			if ((rPath [nearestP [i]].position.x == environmentPathObj [i].position.x) && (rPath [nearestP [i]].position.z == environmentPathObj [i].position.z)) {
-				nearestP [i] = (nearestP [i] + 1) % (rPath.Count);
+				if (random) {
+					nearestP [i] = (nearestP [i] + Random.Range (-1, 1)) % rPath.Count;
+					if (nearestP [i] < 0)
+						nearestP [i] = 0;
+				} else {
+					nearestP[i] = (nearestP[i] + 1)% rPath.Count;
+				}
+				
 			} 
 
 			_direction = (targetPosition - environmentPathObj [i].position).normalized;
@@ -107,10 +138,16 @@ public class EnvironmentSystem : MonoBehaviour {
 		}
 	}
 
+	// Remove from others
 	public void RemoveEnvironmentControl(Transform tObject) {
-		int index = environmentEasyMovement.IndexOf(tObject);
+		int index = environmentEasyXMovement.IndexOf(tObject);
 		if (index != -1) {
-			environmentEasyMovement.RemoveAt (index);
+			environmentEasyXMovement.RemoveAt (index);
+		} else {
+			index = environmentEasyZMovement.IndexOf(tObject);
+			if (index != -1) {
+				environmentEasyZMovement.RemoveAt (index);
+			}
 		}
 	}
 

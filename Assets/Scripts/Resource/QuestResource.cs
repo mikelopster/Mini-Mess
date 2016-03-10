@@ -15,32 +15,42 @@ public class QuestResource : MonoBehaviour {
 	float bounty;
 	float gold;
 	Quest newQuest;
+	string qStatus;
 
 	// Use this for initialization
 	void Awake () {
 
 		instance = this;
 
-		// Create Resourcei
-		newQuest = new Quest(50f,2000f,new List<int>(new int[]{1,0,1}),new List<int>(),new List<string>(new string[]{"Talk","Talk","Talk"}));
+		// NPC
+		/*
+		 0: Kitti
+		 1: Earth
+		 2: Ben
+		 3: Pay
+		 */
+	
+
+		newQuest = new Quest (50f, 2000f, new List<int> (new int[]{1,0,0,0}), new List<int> (new int[]{1}), new List<string> (new string[]{"Talk","Talk","Enemy","Talk"}));
 		questData.Add (newQuest);
-		questStatus.Add (-1);
+		questStatus.Add (0);
 		questNPC.Add (1);
 		questType.Add ("Talk");
 
-		newQuest = new Quest(100f,200f,new List<int>(new int[]{0,0,1}),new List<int>(),new List<string>(new string[]{"Talk","Enemy","Talk"}));
+		newQuest = new Quest (50f, 2000f, new List<int> (new int[]{3,2,1,1}), new List<int> (), new List<string> (new string[]{"Talk","Talk","Enemy","Talk"}));
 		questData.Add (newQuest);
-		questStatus.Add (0);
-		questNPC.Add (0);
+		questStatus.Add (-1);
+		questNPC.Add (3);
 		questType.Add ("Talk");
-
 
 
 	}
 
 	void Update() {
-		Debug.Log ("Quest 0: Order=" + questStatus[0] + ",NPC=" + questNPC[0] + ",Type=" + questType[0]);
-		Debug.Log ("Quest 1: Order=" + questStatus[1] + ",NPC=" + questNPC[1] + ",Type=" + questType[1]);
+		qStatus = "";
+		qStatus += "Quest 0: Order=" + questStatus [0] + ",NPC=" + questNPC [0] + ",Type=" + questType [0] + "\n";
+		qStatus += "Quest 1: Order=" + questStatus [1] + ",NPC=" + questNPC [1] + ",Type=" + questType [1];
+		Debug.Log (qStatus);
 	}
 
 	public int[] GetQuestIndex(int npcIndex) {
