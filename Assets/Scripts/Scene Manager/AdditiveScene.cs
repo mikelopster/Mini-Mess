@@ -5,15 +5,20 @@ using System.Collections;
 public class AdditiveScene : MonoBehaviour {
 
 	public string name;
+	public string tag;
 
 	void OnTriggerEnter (Collider other) {
-		if (!SceneManager.GetSceneByName (name).isLoaded)
-			StartCoroutine (LoadAdditiveScene ());
+		if (other.CompareTag (tag)) {
+			if (!SceneManager.GetSceneByName (name).isLoaded)
+				StartCoroutine (LoadAdditiveScene ());
+		}
 	}
 
 	void OnTriggerExit (Collider other) {
-		if (SceneManager.GetSceneByName (name).isLoaded)
-			StartCoroutine (UnLoadAdditiveScene ());
+		if (other.CompareTag (tag)) {
+			if (SceneManager.GetSceneByName (name).isLoaded)
+				StartCoroutine (UnLoadAdditiveScene ());
+		}
 	}
 
 	IEnumerator LoadAdditiveScene () {

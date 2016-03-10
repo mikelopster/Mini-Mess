@@ -155,7 +155,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 112214, guid: 662ad1673f4654aaf95067db1df35dbe, type: 2}
       propertyPath: m_TagString
-      value: Main Character
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 112216, guid: 662ad1673f4654aaf95067db1df35dbe, type: 2}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 662ad1673f4654aaf95067db1df35dbe, type: 2}
@@ -376,6 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Vice City
+  tag: Player
 --- !u!135 &960751105
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -845,6 +850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Dock
+  tag: Player
 --- !u!135 &2118652406
 SphereCollider:
   m_ObjectHideFlags: 0
