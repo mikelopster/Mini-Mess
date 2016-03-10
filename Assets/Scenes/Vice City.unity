@@ -732,7 +732,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11421010, guid: 2e30f005a3d6d49ec9c0c0a2cf77147b, type: 2}
+      propertyPath: npcIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 179874, guid: 2e30f005a3d6d49ec9c0c0a2cf77147b, type: 2}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 189622, guid: 2e30f005a3d6d49ec9c0c0a2cf77147b, type: 2}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11483176, guid: 2e30f005a3d6d49ec9c0c0a2cf77147b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 2e30f005a3d6d49ec9c0c0a2cf77147b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &60539009
@@ -1580,6 +1593,10 @@ Prefab:
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 150802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
   m_IsPrefabParent: 0
@@ -2403,6 +2420,10 @@ Prefab:
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 150802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
   m_IsPrefabParent: 0
@@ -2984,7 +3005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  upStar: 0.5
+  upStar: 0.1
 --- !u!1001 &253859168
 Prefab:
   m_ObjectHideFlags: 0
@@ -3302,7 +3323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  upStar: 0.5
+  upStar: 0.1
 --- !u!1001 &276897955
 Prefab:
   m_ObjectHideFlags: 0
@@ -3781,7 +3802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  upStar: 0.5
+  upStar: 0.1
 --- !u!1 &313523879
 GameObject:
   m_ObjectHideFlags: 0
@@ -6824,6 +6845,10 @@ Prefab:
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 150802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
   m_IsPrefabParent: 0
@@ -7169,7 +7194,16 @@ Prefab:
 
 '
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11456094, guid: 614e42903f4be41f480314accb041936, type: 2}
+      propertyPath: npcIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 105262, guid: 614e42903f4be41f480314accb041936, type: 2}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11442908, guid: 614e42903f4be41f480314accb041936, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 614e42903f4be41f480314accb041936, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &665930706
@@ -7578,6 +7612,10 @@ Prefab:
     - target: {fileID: 5450802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
       propertyPath: m_Constraints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 150802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
@@ -8059,6 +8097,10 @@ Prefab:
     - target: {fileID: 5450802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
       propertyPath: m_Constraints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 150802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
@@ -10550,8 +10592,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d278b3a3f34714b94359a521bd2068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
-  upStar: 0.5
+  HP: 10
+  upStar: 0.1
+--- !u!114 &979075289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 979075286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c06cbce05554a238e547581e466234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyIndex: 0
 --- !u!1001 &984100513
 Prefab:
   m_ObjectHideFlags: 0
@@ -11364,7 +11418,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 162688, guid: 0a12e5063fe9e47ceb39cec6b6b05d34, type: 2}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 152806, guid: 0a12e5063fe9e47ceb39cec6b6b05d34, type: 2}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11405632, guid: 0a12e5063fe9e47ceb39cec6b6b05d34, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 0a12e5063fe9e47ceb39cec6b6b05d34, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1034435738
@@ -12440,7 +12503,16 @@ Prefab:
       propertyPath: m_Text
       value: Pay
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11408510, guid: c676c403637624394aa05e971cb2460a, type: 2}
+      propertyPath: npcIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 102170, guid: c676c403637624394aa05e971cb2460a, type: 2}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11438244, guid: c676c403637624394aa05e971cb2460a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c676c403637624394aa05e971cb2460a, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1110556099
@@ -12608,7 +12680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  upStar: 0.5
+  upStar: 0.1
 --- !u!1001 &1117308247
 Prefab:
   m_ObjectHideFlags: 0
@@ -13509,7 +13581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  upStar: 0.5
+  upStar: 0.1
 --- !u!1001 &1184526081
 Prefab:
   m_ObjectHideFlags: 0
@@ -14109,6 +14181,10 @@ Prefab:
     - target: {fileID: 5450802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
       propertyPath: m_Constraints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 150802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
@@ -18029,7 +18105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  upStar: 0.5
+  upStar: 0.1
 --- !u!1001 &1573380061
 Prefab:
   m_ObjectHideFlags: 0
@@ -19639,6 +19715,10 @@ Prefab:
     - target: {fileID: 5450802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
       propertyPath: m_Constraints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 150802, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55fcff81b514f4b8fa7b9ba02409307a, type: 2}

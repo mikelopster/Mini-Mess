@@ -197,15 +197,6 @@ public class UserController_test : MonoBehaviour
 			Cursor.visible = true;
 			openTurn = false;
 		}
-		else if (tag == "Enemy") 
-		{
-			// Assume Enemy Die
-			Destroy (hit.transform.gameObject);
-			EnemyEvent evt = hit.transform.gameObject.GetComponent<EnemyEvent> ();
-			if(evt != null)
-				QuestManager.instance.CheckEnemyQuest (evt.enemyIndex, evt.enemyMain);
-
-		}
 	}
 
 	public void OpenMouseTurn() {

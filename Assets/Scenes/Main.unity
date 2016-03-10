@@ -906,6 +906,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 9485b0c79d11e2e4d0007da98d76c639, type: 2}
   m_PrefabInternal: {fileID: 1038923424}
+--- !u!114 &1054143496 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11440748, guid: cd159156059b34943ac17865473515c1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1889766990}
+  m_Script: {fileID: 11500000, guid: 8f85203263ef49f40880015a24c47818, type: 3}
 --- !u!1 &1055776148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,15 +1276,15 @@ Prefab:
     - target: {fileID: 11410752, guid: 0de2e5aa7c19a4fe69d03dec3da41bc7, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1054143496}
     - target: {fileID: 11410752, guid: 0de2e5aa7c19a4fe69d03dec3da41bc7, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: OpenMouseTurn
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 11420756, guid: 0de2e5aa7c19a4fe69d03dec3da41bc7, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1054143496}
     - target: {fileID: 11420756, guid: 0de2e5aa7c19a4fe69d03dec3da41bc7, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: OpenMouseTurn
@@ -1286,7 +1292,7 @@ Prefab:
     - target: {fileID: 11486086, guid: 0de2e5aa7c19a4fe69d03dec3da41bc7, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1054143496}
     - target: {fileID: 11486086, guid: 0de2e5aa7c19a4fe69d03dec3da41bc7, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: OpenMouseTurn
@@ -1316,6 +1322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starText: {fileID: 366959467}
+  goldText: {fileID: 133524078}
   star: 0
   gold: 0
 --- !u!1001 &1889766990
