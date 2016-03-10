@@ -7,6 +7,7 @@ public class ResourceManager : MonoBehaviour {
 	public static ResourceManager instance;
 	public Text starText;
 	public Text goldText;
+	public Text hpText;
 
 	public float star = 0;
 	public float gold = 0;
@@ -48,4 +49,7 @@ public class ResourceManager : MonoBehaviour {
 		goldText.text = gold.ToString();
 	}
 
+	public void SetHP(int hp) {
+		hpText.text = hp.ToString ();
+	}
 }
