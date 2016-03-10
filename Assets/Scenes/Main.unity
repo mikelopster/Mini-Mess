@@ -1380,6 +1380,14 @@ Prefab:
       propertyPath: moveSetting.jumpVel
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 11440748, guid: cd159156059b34943ac17865473515c1, type: 2}
+      propertyPath: moveSetting.distToGrounded
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440748, guid: cd159156059b34943ac17865473515c1, type: 2}
+      propertyPath: moveSetting.distForWalk
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd159156059b34943ac17865473515c1, type: 2}
   m_IsPrefabParent: 0

@@ -28,6 +28,7 @@ public class ResourceManager : MonoBehaviour {
 			// Call Army!!
 			EnemyStar.instance.SpawnArmy (1);
 		} else if(star < 0) {
+			starText.text = "0";
 			EnemyStar.instance.ClearArmy ();
 		}
 

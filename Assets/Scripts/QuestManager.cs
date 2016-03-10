@@ -107,6 +107,9 @@ public class QuestManager : MonoBehaviour {
 			// Unlock Next Quest
 			List<int> unlockL = currentQuest.GetUnlockList();
 			UpdateQuestList (unlockL);
+
+			// Collect Gold!
+			ResourceManager.instance.SetGold(currentQuest.GetGold());
 		}
 		
 	

@@ -39,7 +39,7 @@ public class QuestResource : MonoBehaviour {
 
 		newQuest = new Quest (50f, 2000f, new List<int> (new int[]{3,2,1,1}), new List<int> (), new List<string> (new string[]{"Talk","Talk","Enemy","Talk"}));
 		questData.Add (newQuest);
-		questStatus.Add (-1);
+		questStatus.Add (0);
 		questNPC.Add (3);
 		questType.Add ("Talk");
 
