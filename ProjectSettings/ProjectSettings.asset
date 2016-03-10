@@ -10,7 +10,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: MiniMess
+  productName: minimess
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
@@ -96,7 +96,11 @@ PlayerSettings:
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   virtualRealitySupported: 0
+<<<<<<< HEAD
   productGUID: 06b07dd64f4d744488e3159ad703ef41
+=======
+  productGUID: 79dc60409c58a4c4aa60984bad2989ad
+>>>>>>> origin/master
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
@@ -256,7 +260,11 @@ PlayerSettings:
   ps4ApplicationParam4: 0
   ps4DownloadDataSize: 0
   ps4GarlicHeapSize: 2048
+<<<<<<< HEAD
   ps4Passcode: WsRw3y5L05DIIWDsCMUU5LZeKHNbYXy6
+=======
+  ps4Passcode: okYDeWl5noesnB4mh19PM6Dph2Nh722A
+>>>>>>> origin/master
   ps4pnSessions: 1
   ps4pnPresence: 1
   ps4pnFriends: 1
@@ -293,7 +301,11 @@ PlayerSettings:
   psp2LiveAreaTrialPath: 
   psp2PatchChangeInfoPath: 
   psp2PatchOriginalPackage: 
+<<<<<<< HEAD
   psp2PackagePassword: FQacon9yrSOjc0426A0ETHn7pu7Hw4yu
+=======
+  psp2PackagePassword: ggBfUKJEdmm09Z1uFII2PNfTdMjJFB59
+>>>>>>> origin/master
   psp2KeystoneFile: 
   psp2MemoryExpansionMode: 0
   psp2DRMType: 0
@@ -334,14 +346,14 @@ PlayerSettings:
     16: CROSS_PLATFORM_INPUT;MOBILE_INPUT
     17: MOBILE_INPUT
     20: MOBILE_INPUT
-  metroPackageName: MiniMess
+  metroPackageName: minimess
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: MiniMess
+  metroApplicationDescription: minimess
   wsaImages: {}
   metroTileShortName: 
   metroCommandLineArgsFile: 
