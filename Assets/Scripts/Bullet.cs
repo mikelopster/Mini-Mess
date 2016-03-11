@@ -20,6 +20,10 @@ public class Bullet : MonoBehaviour {
 		if (col.transform.tag == "Enemy") {
 			col.gameObject.GetComponent<Life> ().TakeDamage (damage);
 		}
+		else if (col.transform.tag == "Player") 
+		{
+			col.gameObject.GetComponent<PlayerResource> ().TakeDamage (damage);
+		}
 		Destroy (gameObject);
 	}
 }

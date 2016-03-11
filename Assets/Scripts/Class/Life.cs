@@ -26,6 +26,7 @@ public class Life : MonoBehaviour {
 	}
 
 	public void TakeDamage (int damage) {
+		GetComponent<EnemyShooting> ().enabled = true;
 		// Add Following Player
 		EnemyFollowing.instance.AddFollowing (transform);
 		ResourceManager.instance.SetStar (upStar);

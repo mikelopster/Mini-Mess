@@ -9,13 +9,16 @@ public class CameraController_test : MonoBehaviour {
 	public float maximumY = 30;
 	float rotationY = 0;
 	Quaternion originalRotation;
+	Vector3 old_position;
 
 	void Update ()
 	{
-		rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-		rotationY = ClampAngle (rotationY, minimumY, maximumY);
-		Quaternion yQuaternion = Quaternion.AngleAxis (-rotationY, Vector3.right);
-		transform.localRotation = originalRotation * yQuaternion;
+		if (transform.parent.GetComponent<PlayerResource> ().HP > 0) {
+			rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
+			rotationY = ClampAngle (rotationY, minimumY, maximumY);
+			Quaternion yQuaternion = Quaternion.AngleAxis (-rotationY, Vector3.right);
+			transform.localRotation = originalRotation * yQuaternion;
+		}
 	}
 
 	void Start ()

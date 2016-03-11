@@ -59,6 +59,7 @@ public class NPCResource : MonoBehaviour {
 
 	
 //
+		Debug.Log("LoadNPC");
 	}
 
 	public NPC LoadNPC(int index) {
