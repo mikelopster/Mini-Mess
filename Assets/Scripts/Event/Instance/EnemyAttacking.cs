@@ -43,6 +43,9 @@ public class EnemyAttacking : MonoBehaviour {
 	void EnemyATK() {
 		for (int i = 0; i < enemyList.Count; i++) {
 
+			if (enemyList [i] == null)
+				continue;
+			
 			Vector3 targetPosition = new Vector3 (Mike.position.x, enemyList[i].position.y, Mike.position.z);
 			enemyList[i].position = Vector3.MoveTowards (enemyList[i].position, targetPosition , 0.5f * Time.deltaTime);
 

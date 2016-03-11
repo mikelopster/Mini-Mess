@@ -1188,7 +1188,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11486636, guid: 2be9ccb26fdce9d46a78b1c3a0db09c2, type: 2}
       propertyPath: moveSetting.walkVel
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11405234, guid: 2be9ccb26fdce9d46a78b1c3a0db09c2, type: 2}
       propertyPath: fireRate

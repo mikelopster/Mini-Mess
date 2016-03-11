@@ -54,9 +54,7 @@ public class EnvironmentSystem : MonoBehaviour {
 		MoveToPath (environmentRandomPathMovement,allTownPath,nearestRandom,2f,true);
 
 	}
-
-
-
+		
 	// Move Easy 
 	IEnumerator TurnAround() {
 		while (true) {
@@ -125,7 +123,7 @@ public class EnvironmentSystem : MonoBehaviour {
 				if (random) {
 					nearestP [i] = (nearestP [i] + Random.Range (-1, 1)) % rPath.Count;
 					if (nearestP [i] < 0)
-						nearestP [i] = 0;
+						nearestP [i] = rPath.Count - 1;
 				} else {
 					nearestP[i] = (nearestP[i] + 1)% rPath.Count;
 				}
@@ -147,8 +145,14 @@ public class EnvironmentSystem : MonoBehaviour {
 			index = environmentEasyZMovement.IndexOf(tObject);
 			if (index != -1) {
 				environmentEasyZMovement.RemoveAt (index);
+			} else {
+				index = environmentRandomPathMovement.IndexOf (tObject);
+				if (index != 1) {
+					environmentRandomPathMovement.RemoveAt (index);
+				}
 			}
 		}
+			
 	}
 
 }
