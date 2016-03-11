@@ -4,6 +4,7 @@ using System.Collections;
 public class Life : MonoBehaviour {
 	public int HP = 100;
 	public float upStar = 0.5f;
+	public bool onFirst = false;
 
 	IEnumerator WaitForDead()
 	{
@@ -11,8 +12,7 @@ public class Life : MonoBehaviour {
 		Destroy (gameObject);
 	}
 
-	public void Dead ()
-	{
+	public void Dead () {
 		EnemyFollowing.instance.RemoveFollowing (transform);
 
 		// Call Quest
@@ -26,13 +26,23 @@ public class Life : MonoBehaviour {
 	}
 
 	public void TakeDamage (int damage) {
-		GetComponent<EnemyShooting> ().enabled = true;
-		// Add Following Player
-		EnemyFollowing.instance.AddFollowing (transform);
-		ResourceManager.instance.SetStar (upStar);
+		if (!onFirst) {
+			EnemyShooting st = GetComponent<EnemyShooting> ();
 
+			if (st != null)
+				GetComponent<EnemyShooting> ().enabled = true;
+
+			EnvironmentSystem.instance.RemoveEnvironmentControl (transform);
+			EnemyFollowing.instance.AddFollowing (transform);
+
+			onFirst = true;
+		}
+
+
+		ResourceManager.instance.SetStar (upStar);
+//
 		// Remove from Environment controller
-		EnvironmentSystem.instance.RemoveEnvironmentControl (transform);
+
 
 		HP -= damage;
 		if (HP < 0)
