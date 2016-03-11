@@ -18,7 +18,11 @@ public class Bullet : MonoBehaviour {
 
 	void OnCollisionEnter (Collision col) {
 		if (col.transform.tag == "Enemy") {
-			col.gameObject.GetComponent<Life> ().TakeDamage (damage);
+			Debug.Log ("FFF");
+			Life l = col.gameObject.GetComponent<Life>();
+
+			if(l != null)
+				l.TakeDamage (damage);
 		}
 		else if (col.transform.tag == "Player") 
 		{

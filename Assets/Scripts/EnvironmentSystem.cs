@@ -147,7 +147,7 @@ public class EnvironmentSystem : MonoBehaviour {
 				environmentEasyZMovement.RemoveAt (index);
 			} else {
 				index = environmentRandomPathMovement.IndexOf (tObject);
-				if (index != 1) {
+				if (index != -1) {
 					environmentRandomPathMovement.RemoveAt (index);
 				}
 			}

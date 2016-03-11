@@ -43,9 +43,7 @@ public class EnemyFollowing : MonoBehaviour {
 	public void MoveToPlayer() {
 		for (int i = 0; i < enemyFollowing.Count; i++) {
 
-			if (enemyFollowing [i] == null)
-				continue;
-		
+			
 			Vector3 targetPosition = new Vector3 (Mike.position.x, enemyFollowing[i].position.y, Mike.position.z);
 			enemyFollowing[i].position = Vector3.MoveTowards (enemyFollowing[i].position, targetPosition , 0.5f * Time.deltaTime);
 
