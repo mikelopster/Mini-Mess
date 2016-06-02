@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -1006,7 +1006,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 488868, guid: 2be9ccb26fdce9d46a78b1c3a0db09c2, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 103060, guid: 2be9ccb26fdce9d46a78b1c3a0db09c2, type: 2}
       propertyPath: m_Name
@@ -1030,7 +1030,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11486636, guid: 2be9ccb26fdce9d46a78b1c3a0db09c2, type: 2}
       propertyPath: moveSetting.walkVel
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11405234, guid: 2be9ccb26fdce9d46a78b1c3a0db09c2, type: 2}
       propertyPath: fireRate
